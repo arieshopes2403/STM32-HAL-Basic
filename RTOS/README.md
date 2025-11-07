@@ -1,57 +1,87 @@
-## 1. RTOS
-### 1.1 RTOS is standard Real Time Operating System hay hệ điều hành thời gian thực được dùng trong các vi điều khiển để điều khiển thiết bị  một cách nhanh chóng và đa nhiệm (multi tasking).
+# RTOS
 
-#### Operating System: 
-- Hệ điều hành là một tập hợp các chương trình được thiết kế để quản lý tất cả các tài nguyên của máy tính. Nói cách khác, một tập hợp các chương trình đóng vai trò trung gian giữa người dùng máy tính và phần cứng máy tính.
+## Mục lục
+- [1. RTOS là gì?](#1-rtos-là-gì)
+- [2. Đặc trưng RTOS](#2-đặc-trưng-rtos)
+- [3. Task State](#3-task-state)
+- [4. Scheduling](#4-scheduling)
+- [5. Delay note](#5-delay-note)
 
-- Bộ nhớ, thiết bị I/O, thiết bị liên lạc, v.v. là tài nguyên phần cứng của máy tính. Hệ thống tệp, bộ nhớ ảo, bảo mật, v.v. là tài nguyên phần mềm. Bây giờ một tập hợp các chương trình được sử dụng để quản lý tất cả các tài nguyên này được gọi là hệ điều hành.
 
-#### Shell
-- Shell is the program that handles all other programs.( Shell là chương trình xử lý tất cả các chương trình khác)
+---
 
-##### For example:
-- K- shell or Born shell in UNIX
-- Explorer.exe in windows
-- Command program in DOS
+## 1. RTOS là gì?
+RTOS (Real-Time Operating System) là hệ điều hành thời gian thực cho vi điều khiển, dùng để điều khiển thiết bị theo kiểu đa nhiệm (multi-tasking) và có thời gian đáp ứng dự đoán được.
 
-#### Kernel
-- The kernel provides the most basic control over all of the computer’s hardware devices. Time management, task scheduling, memory management, file system, etc. all are monitored by the Kernel.
-( Cung cấp khả năng kiểm soát cơ bản nhất đối với tất cả các thiết bị phần cứng của máy tính. Quản lý thời gian, lập lịch tác vụ, quản lý bộ nhớ, hệ thống tệp, v.v. đều được Kernel giám sát.)
+### Operating System
+Quản lý tài nguyên phần cứng & phần mềm:
+- bộ nhớ
+- I/O
+- giao tiếp
+- file system
+- bộ nhớ ảo
+- bảo mật
+
+### Shell
+Chương trình dùng để thực thi chương trình khác  
+*VD:* bash (UNIX), explorer.exe (Windows), command (MS-DOS)
+
+### Kernel
 ![alt text](images/3.png)
-### 1.2 Các đặc trưng của RTOS.
-- High performance.
-- Safety and security.
-- Priority-based scheduling.
-- Small.
-### 1.3 Cách hoạt động của RTOS.
-Điều phối các Task, lập lịch và phân mức ưu tiên cho Task (Cơ chế Multi-Tasking)
+Đảm nhiệm:
+- quản lý thời gian
+- task scheduling
+- memory management
+- file system
 
-![anh](images/1.png)
-- Nó cứ bị scheduler đá qua đá lại giữa các trạng thái — giống kiểu con người khi làm việc thì lúc đang gõ code, lúc thì đứng chờ compile, lúc thì bỏ đó đi pha cà phê.
 
-![alt text](images/2.png)
+---
 
-#### RUNNING:
-- CPU hiện giờ đang dành cho task này.
-- Nó đang thực sự chạy code.
-#### READY:
-- đã đủ điều kiện để chạy.
-- chỉ là phải… chờ scheduler.
-- giống kiểu “tôi sẵn rồi, cho tôi slot CPU đi”.
-#### BLOCKED: Dừng tạm thời chờ chạy lại
-- đang đợi 1 cái gì đó: delay() hết thời gian, queue có dữ liệu, semaphore release…
-- bản chất: nó không chạy, nhưng cũng không rảnh — nó chờ điều kiện.
-#### SUSPEND: kiểu “freezer”, bị người khác tạm cất vào tủ. Nếu ko phá “freezer” băng sẽ dừng đó mãi mãi.
-### 1.3 Scheduling
-#### Priority-based Preemptive Scheduling 
-- Mỗi task được gán một mức ưu tiên (Priority), và RTOS sẽ luôn chọn task có mức ưu tiên cao nhất để chạy. Nếu một task mới có mức ưu tiên cao hơn task đang chạy, RTOS sẽ tạm hoãn task đang chạy và chuyển sang task có mức ưu tiên cao hơn.
-- RTOS sử dụng một hàng đợi ưu tiên cho các task sẵn sàng thực thi. Khi một task sẵn sàng chạy, hệ thống sẽ chọn task có mức ưu tiên cao nhất từ hàng đợi để thực thi.
-#### Tóm tắt Task
+## 2. Đặc trưng RTOS
+- high performance
+- safety & security
+- priority-based scheduling
+- kích thước nhỏ
+
+![alt text](images/1.png)
+
+---
+
+## 3. Task State
+
+| State | Ý nghĩa |
+|---|---|
+| RUNNING | đang chiếm CPU |
+| READY | đủ điều kiện chạy nhưng đang đợi CPU |
+| BLOCKED | đang chờ điều kiện (timeout, queue, semaphore…) |
+| SUSPEND | bị tạm dừng bởi lệnh suspend |
+
+![anh](images/2.png)
+
+---
+
+## 4. Scheduling
+
+**Priority-based preemptive scheduling**
+
+- mỗi task có priority
+- task priority cao chạy trước
+- nếu task mới có priority cao hơn → kernel sẽ preempt task hiện tại
+
+Tóm tắt:
+1) priority cao → chạy trước  
+2) nếu priority cao không block → task khác không được chạy  
 ![alt text](images/4.png)
-1. Độ ưu tiên cao hơn -> chạy trước.
-2. Nếu thằng có độ ưu tiên cao nó ko bị block hoặc dừng lại bởi 1 cơ chế nào đó -> kernel sẽ không cấp tài nguyên cho thằng task nào khác.
+
+---
+
+## 5. Delay note và các Task API hay dùng
+
+| API | Ảnh hưởng |
+|---|---|
+| `HAL_Delay()` | block toàn hệ thống |
+| `osDelay()` | chỉ block task hiện tại, các task khác vẫn chạy |
 - Link: https://khuenguyencreator.com/stm32-rtos-cac-trang-thai-cua-task/
+
 ![alt text](images/6.png)
 ![alt text](images/5.png)
-- HAL_delay -> gây delay cho cả hệ thống, dùng khi ko yêu cầu chặt chẽ về
-- os_delay (delay trong task. khi bị delay những task khác có thể chạy,  )
