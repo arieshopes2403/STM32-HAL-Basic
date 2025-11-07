@@ -10,7 +10,7 @@ void mPrint(const char*format, ...)
     vsnprintf(buffer, sizeof(buffer), format, args);
     va_end(args);
     // UART Transmit
-    
+    //HAL_UART_Transmit(&huart1, (uint8_t*)buffer, 104, 1000); 
 }
 
 int main() {

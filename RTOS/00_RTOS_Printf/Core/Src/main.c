@@ -114,7 +114,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	 mPrint("Hoc lai tu dau cung Hieu %d\r\n", 8386);
+	 mPrint("Hoc lai tu dau cung Hieu %d\r\n", 2403);
 	 HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
