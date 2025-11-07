@@ -53,6 +53,5 @@
 - Link: https://khuenguyencreator.com/stm32-rtos-cac-trang-thai-cua-task/
 ![alt text](images/6.png)
 ![alt text](images/5.png)
-
 - HAL_delay -> gây delay cho cả hệ thống, dùng khi ko yêu cầu chặt chẽ về
 - os_delay (delay trong task. khi bị delay những task khác có thể chạy,  )
