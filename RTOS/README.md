@@ -28,4 +28,4 @@
 ### 1.3 Cách hoạt động của RTOS.
 Điều phối các Task, lập lịch và phân mức ưu tiên cho Task (Cơ chế Multi-Tasking)
 
-![alt text](image.png)
+![anh](images/image.png)
