@@ -1,6 +1,6 @@
 # RTOS
 
-## Mục lục
+## MỤC LỤC
 - [1. RTOS là gì?](#1-rtos-là-gì)
 - [2. Đặc trưng RTOS](#2-đặc-trưng-rtos)
 - [3. Task State](#3-task-state)
